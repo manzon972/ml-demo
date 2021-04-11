@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Items from "./pages/items/Items";
+import ItemDetail from "./pages/itemDetail/ItemDetail";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Route exact path="/items">
                     <Items/>
                 </Route>
+                <Route path="/items/:id" children={<ItemDetail/>}/>
             </Switch>
         </Router>
     );

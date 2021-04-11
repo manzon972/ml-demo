@@ -1,0 +1,15 @@
+.search-results {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .search-stack {
+    display: inline-flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+
+  }
+}
+
+

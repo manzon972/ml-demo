@@ -1,8 +1,8 @@
 .full-screen {
-  height: 100vh;
+  min-height: 100vh;
 }
 
-.white-bg{
+.white-bg {
   background: white;
 }
 
@@ -12,6 +12,7 @@
   margin-right: auto;
   padding-right: 15px;
   padding-left: 15px;
+  height: auto;
 }
 
 @media (min-width: 576px) {

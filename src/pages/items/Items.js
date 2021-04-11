@@ -1,12 +1,12 @@
 import React from "react";
 import Header from "../../components/header/Header";
-import ItemList from "../../components/itemList/ItemList";
+import ItemListContainer from "../../components/itemListContainer/ItemListContainer";
 
 function Items() {
     return (
         <div>
             <Header/>
-            <ItemList/>
+            <ItemListContainer/>
         </div>
     );
 }

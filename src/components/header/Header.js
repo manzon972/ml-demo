@@ -36,7 +36,7 @@ class Header extends Component {
                             <img alt="React" src={logo} width="50"/>
                         </a>
                     </div>
-                    <input className="navSearchInput ml15" type="text"
+                    <input className="navSearchInput ml-1" type="text"
                            onChange={this.handleInputChange}
                            placeholder="Nunca dejes de buscar" name="search"/>
                     <button onClick={this.handleSearchClick} type="submit" className="navSearchBtn">
