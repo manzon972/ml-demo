@@ -25,10 +25,13 @@ class Item extends Component {
                                 <NumberFormat className="price-tag" value={item.price.amount} displayType={'text'}
                                               thousandSeparator={true} prefix={'$'}/>
                                 {item.free_shipping && (<span className="ml-h">
-                                    <img src={shippingIcon} width="23px"/>
+                                    <img src={shippingIcon} width="23px" alt={item.title}/>
                                 </span>)}
                             </div>
                             <span className="search-item-title">{item.title}</span>
+                        </div>
+                        <div className="search-item-location mt-3 mr-2">
+                            <span className="search-item-title">{item.location}</span>
                         </div>
                     </div>
                 </li>

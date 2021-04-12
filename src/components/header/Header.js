@@ -8,23 +8,11 @@ import '../../styles/spacing.scss';
 import './Header.scss';
 
 class Header extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            search: ''
-        };
-    }
 
-    handleInputChange = (event) => {
-        event.preventDefault()
-        this.setState({
-            search: event.target.value
-        })
-    }
-    handleSearchClick = (event) => {
-        event.preventDefault()
-        console.log(this.state)
-        this.props.history.push(`/items/?search=${this.state.search}`);
+    handleKeyDown(e) {
+        if (e.key === 'Enter') {
+            this.props.onSearch()
+        }
     }
 
     render() {
@@ -37,9 +25,10 @@ class Header extends Component {
                         </a>
                     </div>
                     <input className="navSearchInput ml-1" type="text"
-                           onChange={this.handleInputChange}
+                           onChange={e => this.props.onChange(e)}
+                           onKeyDown={e => this.handleKeyDown(e)}
                            placeholder="Nunca dejes de buscar" name="search"/>
-                    <button onClick={this.handleSearchClick} type="submit" className="navSearchBtn">
+                    <button onClick={() => this.props.onSearch()} type="submit" className="navSearchBtn">
                         <FontAwesomeIcon icon={faSearch}/>
                     </button>
                 </div>
