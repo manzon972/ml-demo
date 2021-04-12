@@ -13,6 +13,7 @@ class ItemDetail extends Component {
         super(props);
         this.state = {
             loading: true,
+            error: true,
             item: null
         }
     }
@@ -20,19 +21,29 @@ class ItemDetail extends Component {
     componentDidMount(props) {
         const id = this.props.match.params.id;
         const apiUrl = `http://localhost:4000/api/items/${id}`
-        axios.get(apiUrl).then(apiRes => {
+        axios.get(apiUrl).finally(() => {
+            this.setState({...this.state, loading: false})
+        }).then(apiRes => {
             const data = apiRes.data
-            this.setState({...this.state, item: data.item, loading: false})
-            console.log(this.state)
+            this.setState({...this.state, item: data.item, error: false})
             this.props.setBreadcrumb(['Detalle', this.state.item.title])
+        }).catch((e) => {
+            console.error(e)
+            this.setState({...this.state, error: true})
         })
     }
 
     render() {
+        const loading = this.state.loading;
+        const error = this.state.error;
         const item = this.state.item;
+
         return (
             <div className="white-bg">
-                {this.state.loading ? <Loader/> :
+                {loading ? <Loader/> : error ?
+                    <h2 align="center" className="m-0 pt-4 pb-4">
+                        Ha ocurrido un error ):
+                    </h2> :
                     <Fragment>
                         <div className="detail-wrapper">
                             <div className="detail-image-wrapper">

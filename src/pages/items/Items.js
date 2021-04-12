@@ -12,6 +12,7 @@ class Items extends Component {
         super(props);
         this.state = {
             loading: true,
+            error: false,
             items: []
         }
     }
@@ -31,18 +32,24 @@ class Items extends Component {
 
     populate(query) {
         const apiUrl = `http://localhost:4000/api/items?q=${query}`
-        axios.get(apiUrl).then(apiRes => {
+        axios.get(apiUrl).finally(() => {
+            this.setState({...this.state, loading: false})
+        }).then(apiRes => {
             const data = apiRes.data
-            this.setState({items: data.items, loading: false})
+            this.setState({...this.state, items: data.items, error: false})
+        }).catch((e) => {
+            console.error(e)
+            this.setState({...this.state, error: true})
         })
     }
 
     render() {
         const items = this.state.items;
+        const error = this.state.items;
         return (
             <div className="white-bg">
                 {this.state.loading ? <Loader/> :
-                    <ItemsList items={items}/>}
+                    <ItemsList items={items} error={error}/>}
             </div>
         )
     }
@@ -60,7 +67,8 @@ function ItemsList(props) {
         <section className="search-results">
             <ol className="search-stack">
                 {itemsView.length > 0 ? itemsView : (
-                    <h2 align="center" className="m-0 pt-4 pb-4">No se han encontrado resultados con tu búsqueda.</h2>
+                    <h2 align="center"
+                        className="m-0 pt-4 pb-4">{props.error ? 'Ha ocurrido un error ):' : 'No se han encontrado resultados con tu búsqueda.'}</h2>
                 )}
             </ol>
         </section>
